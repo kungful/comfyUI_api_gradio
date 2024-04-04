@@ -25,22 +25,12 @@ To run the code:
 2. Install dependencies (`pip install requests Pillow gradio numpy`)
 3. Modify the Comfy UI installation path
 4. Open `python image_to_image.py` and modify the `INPUT_DIR` and `OUTPUT_DIR`and' folder path
-image_to_image.py:resized_image.save(os.path.join(INPUT_DIR, "test_api.jpg"))  =  wlopsimple_api.json:"14": {
-    "inputs": {
-      "image": "test_api.jpg",
-      "upload": "image"
-    },
-    "class_type": "LoadImage",
-    "_meta": {
-      "title": "加载图像"
-    }
-  },
-5. Run `python app.py`
+image_to_image.py:  resized_image.save(os.path.join(INPUT_DIR, "test_api.jpg"))The "test_api.jpg" is equal to the image of wlopsimple_api.json loading node's "image": "test_api.jpg"
 6. Open the localhost link to view in Gradio interface
 
 The main files:
 
-- `app.py` - Contains Gradio UI and API logic
-- `workflow_api.json` - Saved Comfy UI workflow
+- `image_to_image.py` - Contains Gradio UI and API logic
+- `wlopsimple_api.json` - Saved Comfy UI workflow
 
 Let me know if you have any other questions!
