@@ -1,0 +1,200 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 756159029075134,
+      "steps": 20,
+      "cfg": 8,
+      "sampler_name": "uni_pc",
+      "scheduler": "ddim_uniform",
+      "denoise": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "4": {
+    "inputs": {
+      "ckpt_name": "wlop12W.safetensors",
+      "+": null
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Checkpoint加载器(简易)"
+    }
+  },
+  "5": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": [
+        "18",
+        0
+      ],
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "10": {
+    "inputs": {
+      "ckpt_name": "llava-v1.6-mistral-7b.Q5_K_M.gguf",
+      "max_ctx": 2048,
+      "gpu_layers": 100,
+      "n_threads": 2,
+      "clip": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "LLava Loader Simple",
+    "_meta": {
+      "title": "LLava加载器(简易)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "clip_name": "mmproj-model-f16.gguf"
+    },
+    "class_type": "LlavaClipLoader",
+    "_meta": {
+      "title": "Llava Clip Loader"
+    }
+  },
+  "12": {
+    "inputs": {
+      "input_text": "describe this picture"
+    },
+    "class_type": "SimpleText",
+    "_meta": {
+      "title": "简易文本"
+    }
+  },
+  "14": {
+    "inputs": {
+      "image": "test_api.jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "15": {
+    "inputs": {
+      "system_msg": "You are an assistant who perfectly describes images.",
+      "prompt": [
+        "12",
+        0
+      ],
+      "max_tokens": 128,
+      "temperature": 0.2,
+      "top_p": 0.95,
+      "top_k": 40,
+      "frequency_penalty": 0,
+      "presence_penalty": 0,
+      "repeat_penalty": 1.1,
+      "seed": 1170,
+      "image": [
+        "14",
+        0
+      ],
+      "model": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "LLavaSamplerAdvanced",
+    "_meta": {
+      "title": "LLava采样器"
+    }
+  },
+  "18": {
+    "inputs": {
+      "action": "append",
+      "tidy_tags": "yes",
+      "text_a": "wgz style,portrait of a beautiful girl highly detailed",
+      "text_b": [
+        "15",
+        0
+      ],
+      "text_c": ""
+    },
+    "class_type": "StringFunction|pysssss",
+    "_meta": {
+      "title": "字符串操作"
+    }
+  }
+}
