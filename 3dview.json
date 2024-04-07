@@ -1,0 +1,475 @@
+{
+  "10": {
+    "inputs": {
+      "weight": 0.5,
+      "noise": 0,
+      "weight_type": "original",
+      "start_at": 0,
+      "end_at": 0.5,
+      "unfold_batch": false,
+      "ipadapter": [
+        "11",
+        0
+      ],
+      "clip_vision": [
+        "13",
+        0
+      ],
+      "image": [
+        "14",
+        0
+      ],
+      "model": [
+        "60",
+        0
+      ]
+    },
+    "class_type": "IPAdapterApply",
+    "_meta": {
+      "title": "IP适配应用"
+    }
+  },
+  "11": {
+    "inputs": {
+      "ipadapter_file": "ip-adapter-plus_sdxl_vit-h.safetensors"
+    },
+    "class_type": "IPAdapterModelLoader",
+    "_meta": {
+      "title": "IP适配模型加载器"
+    }
+  },
+  "13": {
+    "inputs": {
+      "clip_name": "SDXL\\SDXL.safetensors",
+      "+": null
+    },
+    "class_type": "CLIPVisionLoader",
+    "_meta": {
+      "title": "CLIP视觉加载器"
+    }
+  },
+  "14": {
+    "inputs": {
+      "image": "test_api.jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "18": {
+    "inputs": {
+      "control_net_name": "control-lora-canny-rank128.safetensors",
+      "+": null
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "ControlNet加载器"
+    }
+  },
+  "19": {
+    "inputs": {
+      "image": "test_api.jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "58": {
+    "inputs": {
+      "noise_seed": [
+        "153",
+        0
+      ],
+      "steps": 30,
+      "cfg": 7,
+      "sampler_name": "dpmpp_3m_sde_gpu",
+      "scheduler": "karras",
+      "start_at_step": 0,
+      "refine_at_step": -1,
+      "preview_method": "none",
+      "vae_decode": "true",
+      "sdxl_tuple": [
+        "59",
+        0
+      ],
+      "latent_image": [
+        "61",
+        1
+      ],
+      "optional_vae": [
+        "61",
+        2
+      ]
+    },
+    "class_type": "KSampler SDXL (Eff.)",
+    "_meta": {
+      "title": "K采样器(SDXL效率)"
+    }
+  },
+  "59": {
+    "inputs": {
+      "base_model": [
+        "10",
+        0
+      ],
+      "base_clip": [
+        "60",
+        1
+      ],
+      "base_positive": [
+        "64",
+        0
+      ],
+      "base_negative": [
+        "64",
+        1
+      ],
+      "refiner_model": [
+        "60",
+        4
+      ],
+      "refiner_clip": [
+        "60",
+        5
+      ],
+      "refiner_positive": [
+        "60",
+        6
+      ],
+      "refiner_negative": [
+        "60",
+        7
+      ]
+    },
+    "class_type": "Pack SDXL Tuple",
+    "_meta": {
+      "title": "打包SDXL元组"
+    }
+  },
+  "60": {
+    "inputs": {
+      "sdxl_tuple": [
+        "61",
+        0
+      ]
+    },
+    "class_type": "Unpack SDXL Tuple",
+    "_meta": {
+      "title": "解包SDXL元组"
+    }
+  },
+  "61": {
+    "inputs": {
+      "base_ckpt_name": "juggernautXL_v8Rundiffusion.safetensors",
+      "base_clip_skip": -2,
+      "refiner_ckpt_name": "None",
+      "refiner_clip_skip": -2,
+      "positive_ascore": 6,
+      "negative_ascore": 2,
+      "vae_name": "Baked VAE",
+      "positive": [
+        "112",
+        0
+      ],
+      "negative": "2d",
+      "token_normalization": "none",
+      "weight_interpretation": "comfy",
+      "empty_latent_width": 1024,
+      "empty_latent_height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "Eff. Loader SDXL",
+    "_meta": {
+      "title": "效率加载器(SDXL)"
+    }
+  },
+  "62": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "58",
+        3
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "64": {
+    "inputs": {
+      "strength": 0.76,
+      "start_percent": 0,
+      "end_percent": 0.637,
+      "positive": [
+        "60",
+        2
+      ],
+      "negative": [
+        "60",
+        3
+      ],
+      "control_net": [
+        "18",
+        0
+      ],
+      "image": [
+        "124",
+        0
+      ]
+    },
+    "class_type": "ACN_AdvancedControlNetApply",
+    "_meta": {
+      "title": "高级ControlNet应用"
+    }
+  },
+  "75": {
+    "inputs": {
+      "low_threshold": 0.44,
+      "high_threshold": 0.58,
+      "image": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "Canny",
+    "_meta": {
+      "title": "Canny"
+    }
+  },
+  "90": {
+    "inputs": {
+      "images": [
+        "124",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "106": {
+    "inputs": {
+      "image": "test_api.jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "107": {
+    "inputs": {
+      "ckpt_name": "llava-v1.6-mistral-7b.Q5_K_M.gguf",
+      "max_ctx": 2048,
+      "gpu_layers": 100,
+      "n_threads": 2,
+      "clip": [
+        "108",
+        0
+      ]
+    },
+    "class_type": "LLava Loader Simple",
+    "_meta": {
+      "title": "LLava加载器(简易)"
+    }
+  },
+  "108": {
+    "inputs": {
+      "clip_name": "mmproj-model-f16.gguf"
+    },
+    "class_type": "LlavaClipLoader",
+    "_meta": {
+      "title": "Llava Clip Loader"
+    }
+  },
+  "110": {
+    "inputs": {
+      "text": [
+        "116",
+        0
+      ]
+    },
+    "class_type": "ViewText",
+    "_meta": {
+      "title": "查看文本"
+    }
+  },
+  "112": {
+    "inputs": {
+      "action": "append",
+      "tidy_tags": "yes",
+      "text_a": [
+        "144",
+        0
+      ],
+      "text_b": [
+        "116",
+        0
+      ],
+      "text_c": ""
+    },
+    "class_type": "StringFunction|pysssss",
+    "_meta": {
+      "title": "字符串操作"
+    }
+  },
+  "116": {
+    "inputs": {
+      "system_msg": "You are an assistant who perfectly describes images.",
+      "prompt": [
+        "117",
+        0
+      ],
+      "max_tokens": 128,
+      "temperature": 0.2,
+      "top_p": 0.95,
+      "top_k": 40,
+      "frequency_penalty": 0,
+      "presence_penalty": 0,
+      "repeat_penalty": 1.1,
+      "seed": 1908,
+      "image": [
+        "106",
+        0
+      ],
+      "model": [
+        "107",
+        0
+      ]
+    },
+    "class_type": "LLavaSamplerAdvanced",
+    "_meta": {
+      "title": "LLava采样器"
+    }
+  },
+  "117": {
+    "inputs": {
+      "input_text": "The colors and items of the characters in the detailed second-speed map,Including skin color, etc.     "
+    },
+    "class_type": "SimpleText",
+    "_meta": {
+      "title": "简易文本"
+    }
+  },
+  "124": {
+    "inputs": {
+      "resolution": 1088,
+      "image": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "Manga2Anime_LineArt_Preprocessor",
+    "_meta": {
+      "title": "MangaAnime漫画艺术线预处理器"
+    }
+  },
+  "125": {
+    "inputs": {
+      "resolution": 512,
+      "image": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "AnimeLineArtPreprocessor",
+    "_meta": {
+      "title": "AnimeLineArt动漫艺术线预处理器"
+    }
+  },
+  "132": {
+    "inputs": {
+      "text": [
+        "112",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "展示文本"
+    }
+  },
+  "144": {
+    "inputs": {
+      "text_positive": "",
+      "text_negative": "",
+      "style": "sai-3d-model",
+      "log_prompt": true,
+      "style_positive": true,
+      "style_negative": true
+    },
+    "class_type": "SDXLPromptStyler",
+    "_meta": {
+      "title": "SDXL风格化提示词"
+    }
+  },
+  "147": {
+    "inputs": {
+      "rembg_session": [
+        "148",
+        0
+      ],
+      "image": [
+        "58",
+        3
+      ]
+    },
+    "class_type": "ImageRemoveBackground+",
+    "_meta": {
+      "title": "图像移除背景"
+    }
+  },
+  "148": {
+    "inputs": {
+      "model": "u2net: general purpose",
+      "providers": "CUDA"
+    },
+    "class_type": "RemBGSession+",
+    "_meta": {
+      "title": "移除背景组"
+    }
+  },
+  "149": {
+    "inputs": {
+      "image": [
+        "147",
+        0
+      ],
+      "mask": [
+        "147",
+        1
+      ]
+    },
+    "class_type": "ETN_ApplyMaskToImage",
+    "_meta": {
+      "title": "Apply Mask to Image"
+    }
+  },
+  "150": {
+    "inputs": {
+      "images": [
+        "149",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "153": {
+    "inputs": {
+      "seed": 452054181696678
+    },
+    "class_type": "CR Seed",
+    "_meta": {
+      "title": "随机种"
+    }
+  }
+}
