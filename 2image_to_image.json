@@ -1,0 +1,323 @@
+{
+  "12": {
+    "inputs": {
+      "text": [
+        "73",
+        0
+      ],
+      "clip": [
+        "43",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "13": {
+    "inputs": {
+      "text": [
+        "76",
+        1
+      ],
+      "clip": [
+        "43",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "14": {
+    "inputs": {
+      "samples": [
+        "64",
+        0
+      ],
+      "vae": [
+        "43",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "15": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "28": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent"
+    }
+  },
+  "43": {
+    "inputs": {
+      "ckpt_name": "juggernautXL_v8Rundiffusion.safetensors",
+      "+": null
+    },
+    "class_type": "unCLIPCheckpointLoader",
+    "_meta": {
+      "title": "unCLIPCheckpoint加载器"
+    }
+  },
+  "59": {
+    "inputs": {
+      "ipadapter_file": "ip-adapter-plus_sdxl_vit-h.safetensors"
+    },
+    "class_type": "IPAdapterModelLoader",
+    "_meta": {
+      "title": "IP适配模型加载器"
+    }
+  },
+  "60": {
+    "inputs": {
+      "clip_name": "SDXL\\SDXL.safetensors",
+      "+": null
+    },
+    "class_type": "CLIPVisionLoader",
+    "_meta": {
+      "title": "CLIP视觉加载器"
+    }
+  },
+  "61": {
+    "inputs": {
+      "image": "image_api.jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "64": {
+    "inputs": {
+      "seed": 932933293732771,
+      "steps": 20,
+      "cfg": 7,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "86",
+        0
+      ],
+      "positive": [
+        "12",
+        0
+      ],
+      "negative": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "28",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "69": {
+    "inputs": {
+      "image": "test_api.jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "70": {
+    "inputs": {
+      "ckpt_name": "llava-v1.6-mistral-7b.Q5_K_M.gguf",
+      "max_ctx": 2048,
+      "gpu_layers": 100,
+      "n_threads": 2,
+      "clip": [
+        "71",
+        0
+      ]
+    },
+    "class_type": "LLava Loader Simple",
+    "_meta": {
+      "title": "LLava加载器(简易)"
+    }
+  },
+  "71": {
+    "inputs": {
+      "clip_name": "mmproj-model-f16.gguf"
+    },
+    "class_type": "LlavaClipLoader",
+    "_meta": {
+      "title": "Llava Clip Loader"
+    }
+  },
+  "72": {
+    "inputs": {
+      "text": [
+        "74",
+        0
+      ],
+      "new_text": " The image is a digital illustration of an anime-style character, a young girl with long brown hair and large blue eyes. She has a cheerful expression on her face, smiling broadly while holding her hands together as if she's excited or happy about something. Her outfit consists of an orange blouse adorned with floral patterns and a matching skirt. A small yellow flower is pinned to her left side, adding a touch of color to her attire.\n\nThe girl is seated at a dining table, which occupies the lower part of the image. On the table, there is a plate of food"
+    },
+    "class_type": "ViewText",
+    "_meta": {
+      "title": "查看文本"
+    }
+  },
+  "73": {
+    "inputs": {
+      "action": "append",
+      "tidy_tags": "yes",
+      "text_a": [
+        "76",
+        0
+      ],
+      "text_b": [
+        "74",
+        0
+      ],
+      "text_c": "",
+      "result": "comic . graphic illustration, comic art, graphic novel art, vibrant, highly detailed, The image is a digital illustration of an anime-style character, a young girl with long brown hair and large blue eyes. She has a cheerful expression on her face, smiling broadly while holding her hands together as if she's excited or happy about something. Her outfit consists of an orange blouse adorned with floral patterns and a matching skirt. A small yellow flower is pinned to her left side, adding a touch of color to her attire.\n\nThe girl is seated at a dining table, which occupies the lower part of the image. On the table, there is a plate of food"
+    },
+    "class_type": "StringFunction|pysssss",
+    "_meta": {
+      "title": "字符串操作"
+    }
+  },
+  "74": {
+    "inputs": {
+      "system_msg": "You are an assistant who perfectly describes images.",
+      "prompt": [
+        "75",
+        0
+      ],
+      "max_tokens": 128,
+      "temperature": 0.2,
+      "top_p": 0.95,
+      "top_k": 40,
+      "frequency_penalty": 0,
+      "presence_penalty": 0,
+      "repeat_penalty": 1.1,
+      "seed": 1909,
+      "image": [
+        "69",
+        0
+      ],
+      "model": [
+        "70",
+        0
+      ]
+    },
+    "class_type": "LLavaSamplerAdvanced",
+    "_meta": {
+      "title": "LLava采样器"
+    }
+  },
+  "75": {
+    "inputs": {
+      "input_text": "Describe everything in the picture"
+    },
+    "class_type": "SimpleText",
+    "_meta": {
+      "title": "简易文本"
+    }
+  },
+  "76": {
+    "inputs": {
+      "text_positive": "",
+      "text_negative": "",
+      "style": "base",
+      "log_prompt": true,
+      "style_positive": true,
+      "style_negative": true
+    },
+    "class_type": "SDXLPromptStyler",
+    "_meta": {
+      "title": "SDXL风格化提示词"
+    }
+  },
+  "77": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "interpolation": "nearest",
+      "keep_proportion": false,
+      "condition": "always",
+      "multiple_of": 0,
+      "image": [
+        "61",
+        0
+      ]
+    },
+    "class_type": "ImageResize+",
+    "_meta": {
+      "title": "图像重缩放"
+    }
+  },
+  "78": {
+    "inputs": {
+      "images": [
+        "77",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "86": {
+    "inputs": {
+      "weight": 0.5,
+      "weight_type": "linear",
+      "combine_embeds": "concat",
+      "start_at": 0,
+      "end_at": 0.5,
+      "embeds_scaling": "V only",
+      "model": [
+        "43",
+        0
+      ],
+      "ipadapter": [
+        "59",
+        0
+      ],
+      "image": [
+        "77",
+        0
+      ],
+      "clip_vision": [
+        "60",
+        0
+      ]
+    },
+    "class_type": "IPAdapterAdvanced",
+    "_meta": {
+      "title": "IPAdapter Advanced"
+    }
+  }
+}
