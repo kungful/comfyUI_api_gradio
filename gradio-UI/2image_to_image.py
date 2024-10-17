@@ -52,7 +52,11 @@ def generate_image(prompt_text_positive, prompt_text_negative):
 demo = gr.Interface(
     fn=generate_image,
     inputs=[gr.Textbox(label="正向提示文本"), gr.Textbox(label="负向提示文本")],
-    outputs=gr.Image(type="filepath", label="生成的图像")
+    outputs=gr.Image(type="filepath", label="生成的图像"),
+    title="封装comfyUI工作流",
+    submit_btn="开始跑图",  # 汉化提交按钮
+    clear_btn="清除",  # 汉化清除按钮
+
 )
 
 # 启动 Gradio 界面，并创建一个公共链接
